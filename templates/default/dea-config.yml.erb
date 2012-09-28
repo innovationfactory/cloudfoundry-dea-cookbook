@@ -6,7 +6,7 @@ base_dir: <%= node[:cloudfoundry_dea][:base_dir] %>
 # is used to choose the right ip address (think of hosts that have multiple nics
 # and IP addresses assigned to them) of the host running the DEA. Default
 # value of nil, should work in most cases.
-local_route: <%= node[:cloudfoundry_common][:local_route] %>
+local_route: <%= node[:ipaddress] %>
 
 # Port for accessing the files of running applications
 filer_port: <%= node[:cloudfoundry_dea][:filter_port] %>
@@ -45,18 +45,5 @@ force_http_sharing: <%= node[:cloudfoundry_dea][:force_http_sharing] %>
 
 runtimes:
 <%- node[:cloudfoundry_dea][:runtimes].each do |_, runtime| %>
-  <%= runtime[:name] %>:
-    executable: <%= runtime[:executable] %>
-    version: <%= runtime[:version] %>
-    version_flag: <%= runtime[:version_flag] %>
-    environment: <%= runtime[:environment] %>
-<%- if runtime[:debug_env] %>
-    debug_env:
-<%- runtime[:debug_env].each do |state, opts| %>
-      <%= state %>:
-<%- opts.each do |opt| %>
-        - <%= opt %>
-<%- end # opts.each%>
-<%- end # debug_env.each%>
-<%- end # if debug_env%>
-<%- end # runtimes.each%>
+<%= "  - #{runtime[:name]}\n" if node.recipes.include? runtime[:cookbook] -%>
+<%- end # runtimes.each %>
