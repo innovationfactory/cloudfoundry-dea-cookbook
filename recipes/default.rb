@@ -21,9 +21,9 @@
   package pkg
 end
 
-directory node[:cloudfoundry_dea][:base_dir] do
+directory node['cloudfoundry_dea']['base_dir'] do
   recursive true
-  owner node[:cloudfoundry_common][:user]
+  owner node['cloudfoundry_common']['user']
   mode  '0755'
 end
 
