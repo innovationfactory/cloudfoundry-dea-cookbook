@@ -34,3 +34,4 @@ default['cloudfoundry_dea']['enforce_ulimit'] = false
 # Force the DEA to download applications over http, even when it's
 # possible to access them via a shared directory.
 default['cloudfoundry_dea']['force_http_sharing'] = true
+

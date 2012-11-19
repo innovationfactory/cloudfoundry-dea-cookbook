@@ -17,7 +17,9 @@
 # limitations under the License.
 #
 
-%w{lsof psmisc librmagick-ruby}.each do |pkg|
+node.default['cloudfoundry_dea']['provided_native_packages'] = node.default['cloudfoundry_stager']['provided_native_packages']
+
+node['cloudfoundry_dea']['provided_native_packages'].each do |pkg|
   package pkg
 end
 
